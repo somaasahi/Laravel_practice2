@@ -12,6 +12,10 @@
                        href="{{ route('posts.index') }}">
                         Back
                     </a>
+                    <a href="{{ route('user.edit', [$user->id]) }}"
+                        class='btn btn-default btn-s'>
+                         <i class="far fa-edit"></i>
+                    </a>
                 </div>
             </div>
         </div>
