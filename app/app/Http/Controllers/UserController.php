@@ -58,7 +58,15 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = Auth::user();
+
+        if (empty($user)) {
+            Flash::error('User not found');
+
+            return redirect(route('posts.index'));
+        }
+
+        return view('users.edit')->with('user', $user);
     }
 
     /**
@@ -70,7 +78,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request->all());
+       $inputs = $request->all();
+       $filename=request()->file('icon')->getClientOriginalName();
+       $inputs['icon'] = request('icon')->storeAs('public/images', $filename);
+       $user = Auth::user();
+       $user->fill([
+        'name' => $inputs['name'],
+        'email' => $inputs['email'],
+        'icon' => $inputs['icon'],
+      ]);
+      $user->save();
+      return redirect(route('user.show'));
     }
 
     /**

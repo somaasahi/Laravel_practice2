@@ -25,4 +25,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('posts', App\Http\Controllers\PostController::class);
 
 Route::get('/user/show', [App\Http\Controllers\UserController::class, 'show'])->middleware('auth')->name('user.show');
-Route::get('/user/edit', [App\Http\Controllers\UserController::class, 'edit'])->middleware('auth')->name('user.edit');
+Route::get('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->middleware('auth')->name('user.edit');
+Route::post('/user/update/{id}', [App\Http\Controllers\UserController::class, 'update'])->middleware('auth')->name('user.update');
